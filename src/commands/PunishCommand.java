@@ -36,8 +36,8 @@ public class PunishCommand implements CommandExecutor {
         plugin.getCommand("punish").setExecutor(this);
     }
     
-    public static void punish(Player p) {
-    	@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
+	public static void punish(Player p) {
 		OfflinePlayer target = Bukkit.getOfflinePlayer(bannedPlayer);
     	String Status = "%player_online%";
         String setStatus = PlaceholderAPI.setPlaceholders(target, Status);
@@ -60,7 +60,8 @@ public class PunishCommand implements CommandExecutor {
         
         ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)15);
         ItemMeta glassm = glass.getItemMeta();
-        glassm.setDisplayName(" ");
+        glassm.setDisplayName(Utils.chat("&aWarn"));
+        glassm.setLore(Arrays.asList(Utils.chat("&bTarget: &7") + bannedPlayer, Utils.chat("&bReason: &7") + msgreason));
         glass.setItemMeta((ItemMeta)glassm);
         
         ItemStack glassred = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)14);
@@ -91,11 +92,11 @@ public class PunishCommand implements CommandExecutor {
         punish.setItem(25, glass);
         punish.setItem(26, glass);
         if (p.hasPermission("litebans.ban")) {
-        Utils.createItem(punish, 399, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
-        Utils.createItem(punish, 399, 1, 12, "&eTempmute", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
-        Utils.createItem(punish, 399, 1, 13, "&6Mute", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
-        Utils.createItem(punish, 399, 1, 14, "&cTempban", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
-        Utils.createItem(punish, 399, 1, 15, "&4Ban", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+        Utils.createItemByte(punish, 35, 5, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+        Utils.createItemByte(punish, 35, 4, 1, 12, "&eTempmute", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
+        Utils.createItemByte(punish, 35, 1, 1, 13, "&6Mute", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+        Utils.createItemByte(punish, 35, 14, 1, 14, "&cTempban", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
+        Utils.createItemByte(punish, 35, 15, 1, 15, "&4Ban", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
         }
         if (!p.hasPermission("litebans.ban")) {
             Utils.createItem(punish, 399, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
