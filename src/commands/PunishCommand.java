@@ -52,7 +52,7 @@ public class PunishCommand implements CommandExecutor {
         	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &aOnline"), Utils.chat("&bRank: ") + setRank));
             }
         if (setStatus.equalsIgnoreCase("No") || setRank.equalsIgnoreCase("")) {
-        	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &cOffline"), Utils.chat("&bRank: &7Unavailable") + setRank));
+        	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &cOffline"), Utils.chat("&bRank: &7Unavailable")));
             }
         playerm.setOwner(bannedPlayer);
         playerm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b" + bannedPlayer));
