@@ -24,120 +24,36 @@ public class InventoryClickListener implements Listener {
 		//Player target = Bukkit.getPlayer(punish.);
 		String title = e.getInventory().getTitle();
 		
-		if (title.equals(Utils.chat("&fKill Aura"))) {
-			e.setCancelled(true);
-			if (e.getCurrentItem() == null) {
-				return;
-			}
-			if ( e.getSlot() == 3 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 14d Kill Aura");
-			if ( e.getSlot() == 4 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 21d Kill Aura (2nd Offense)");
-			if ( e.getSlot() == 5 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 30d Kill Aura (3rd Offense)");
-			if ( e.getSlot() == 8 )
-				p.performCommand("ipban " + punish.bannedPlayer + " Kill Aura");
-			if ( e.getSlot() == 13)
-				PunishCommand.hacks(p);
-		}
-		
-		if (title.equals(Utils.chat("&fXRay"))) {
-			e.setCancelled(true);
-			if (e.getCurrentItem() == null) {
-				return;
-			}
-			if ( e.getSlot() == 0)
-				PunishCommand.hacks(p);
-			if ( e.getSlot() == 3 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 7d XRay");
-			if ( e.getSlot() == 4 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 14d XRay");
-			if ( e.getSlot() == 5 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 21d XRay");
-			if ( e.getSlot() == 8 )
-				p.performCommand("ipban " + punish.bannedPlayer + " XRay");
-			if ( e.getSlot() == 13)
-				PunishCommand.hacks(p);
-		}
-		
-		if (title.equals(Utils.chat("&fType of hacks"))) {
-			e.setCancelled(true);
-			if (e.getCurrentItem() == null) {
-				return;
-			}
-			if ( e.getSlot() == 0 ) 
-				PunishCommand.ka(p);
-			if ( e.getSlot() == 1 )
-				PunishCommand.xray(p);
-			if ( e.getSlot() == 22)
-				PunishCommand.punish(p);
-		}
-		if (title.equals(Utils.chat("&fChat Offense"))) {
-			e.setCancelled(true);
-			if (e.getCurrentItem() == null) {
-				return;
-			}
-			if ( e.getSlot() == 0 )
-				p.performCommand("ipmute " + punish.bannedPlayer + " 30m Spamming");
-			if ( e.getSlot() == 1 )
-				p.performCommand("ipmute " + punish.bannedPlayer + " 1d Toxicity");
-			if ( e.getSlot() == 2 )
-				p.performCommand("ipmute " + punish.bannedPlayer + " 1h Staff/Player Disrespect");
-			if ( e.getSlot() == 3 )
-				p.performCommand("ipmute " + punish.bannedPlayer + " 3d Death Remarks/Threats");
-			if ( e.getSlot() == 4 )
-				p.performCommand("ipmute " + punish.bannedPlayer + " Advertising");
-			if ( e.getSlot() == 13)
-				PunishCommand.punish(p);
-		}
-		if (title.equals(Utils.chat("&fMalicious Offense"))) {
-			e.setCancelled(true);
-			if (e.getCurrentItem() == null) {
-				return;
-			}
-			if ( e.getSlot() == 0 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 3d Death Remarks/Threats");
-			if ( e.getSlot() == 1 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 30d DDoS/Dox Threats");
-			if ( e.getSlot() == 2 )
-				p.performCommand("ipban " + punish.bannedPlayer + " Advertising");
-			if ( e.getSlot() == 13)
-				PunishCommand.punish(p);
-		}
-		if (title.equals(Utils.chat("&fMiscellaneous Offense"))) {
-			e.setCancelled(true);
-			if (e.getCurrentItem() == null) {
-				return;
-			}
-			if ( e.getSlot() == 0 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 1d Toxicity");
-			if ( e.getSlot() == 1 )
-				p.performCommand("ipban " + punish.bannedPlayer + " 3h Abusing Helpop");
-			if ( e.getSlot() == 13)
-				PunishCommand.punish(p);
-		}
-		if (title.equals(Utils.chat("&fLone&4Wolves &fPunishments"))) {
+		if (title.equals(Utils.chat("&7Punish ") + Utils.chat("&b") + punish.bannedPlayer)) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
 			}
 			
 			// Chat Offenses Category
-			if ( e.getSlot() == 3)
-				p.performCommand("ipmute " + punish.bannedPlayer);
-			if ( e.getSlot() == 5)
-				p.performCommand("ipban " + punish.bannedPlayer);
-			if ( e.getSlot() == 10 )
-				PunishCommand.chatoffense(p);
+			if ( e.getRawSlot() == 11 ) {
+				p.performCommand("warn " + punish.bannedPlayer + " " + punish.msgreason);
+				p.closeInventory();
+			}
 			// Hacked Clients Category
-			if ( e.getSlot() == 12 )
-				PunishCommand.hacks(p);
+			if ( e.getRawSlot() == 12 ) {
+				p.performCommand("tempmuteip " + punish.bannedPlayer + " " + punish.msglength + " " + punish.msgreason);
+				p.closeInventory();
+			}
 			// Malicious Category
-			if ( e.getSlot() == 14 )
-				PunishCommand.maliciousoffense(p);
+			if ( e.getRawSlot() == 13 ) {
+				p.performCommand("muteip " + punish.bannedPlayer + " " + punish.msgreason);
+				p.closeInventory();
+			}
 			// Miscellaneous Category
-			if ( e.getSlot() == 16 )
-				PunishCommand.miscoffense(p);
+			if ( e.getRawSlot() == 14 ) {
+				p.performCommand("tempbanip " + punish.bannedPlayer + " " + punish.msglength + " " + punish.msgreason);
+				p.closeInventory();
+			}
+			if ( e.getRawSlot() == 15 ) {
+				p.performCommand("banip " + punish.bannedPlayer + " " + punish.msgreason);
+				p.closeInventory();
+			}
 			}
 }
 }
