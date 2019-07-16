@@ -25,7 +25,7 @@ public class PunishCommand implements CommandExecutor {
 	public static String bannedPlayer;
 	
 	public static String msglength;
-	public static String msgreason;
+	public static StringBuilder msgreason;
 
     @SuppressWarnings("unused")
 	private PunishGUI plugin;
@@ -117,13 +117,17 @@ public class PunishCommand implements CommandExecutor {
         Player player = (Player) sender;
         if (player.hasPermission("lw.punish")) {
             if (args.length < 3) {
-                player.sendMessage(Utils.chat("&cUsage: /punish <player> <time> <reason>"));
+                player.sendMessage(Utils.chat("&cUsage: &7/punish <player> <time> <reason>"));
+                player.sendMessage(Utils.chat("&cExample: &7/punish DeathRealms 14d Hacked Client"));
             }
             else {
-                Player target = Bukkit.getPlayer(args[0]);
+                Player target = Bukkit.getPlayer(args[2]);
+                PunishCommand.msgreason = new StringBuilder(args[2]);
+                for (int arg = 3; arg < args.length; arg++) {
+                	msgreason.append(" ").append(args[arg]);
+                }
                 PunishCommand.bannedPlayer = args[0];
                 PunishCommand.msglength = args[1];
-                PunishCommand.msgreason = args[2];
                 if (target == null) {
                 	PunishCommand.punish(player);
                 }
