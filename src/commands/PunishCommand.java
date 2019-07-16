@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.SkullType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,20 +37,22 @@ public class PunishCommand implements CommandExecutor {
     }
     
     public static void punish(Player p) {
+    	@SuppressWarnings("deprecation")
+		OfflinePlayer target = Bukkit.getOfflinePlayer(bannedPlayer);
     	String Status = "%player_online%";
-        String setStatus = PlaceholderAPI.setPlaceholders(p, Status);
-        String Rank = "%vault_rank%";
-        String setRank = PlaceholderAPI.setPlaceholders(p, Rank);
+        String setStatus = PlaceholderAPI.setPlaceholders(target, Status);
+        String Rank = "%luckperms_prefix%";
+        String setRank = PlaceholderAPI.setPlaceholders(target, Rank);
 
     	Inventory punish = Bukkit.getServer().createInventory(null, 27, Utils.chat("&7Punish ") + Utils.chat("&b") + bannedPlayer);
         ItemStack punishPlayer = new ItemStack(Material.SKULL_ITEM, 1, (short)SkullType.PLAYER.ordinal());
         SkullMeta playerm = (SkullMeta)punishPlayer.getItemMeta();
-        playerm.setLore(Arrays.asList(Utils.chat("&bStatus: ") + setStatus, Utils.chat("&bRank: &7") + setRank));
+        playerm.setLore(Arrays.asList(Utils.chat("&bStatus: ") + setStatus, Utils.chat("&bRank: ") + setRank));
         if (setStatus.equalsIgnoreCase("Yes")) {
-        	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &aOnline"), Utils.chat("&bRank: &7") + setRank));
+        	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &aOnline"), Utils.chat("&bRank: ") + setRank));
             }
-        if (setStatus.equalsIgnoreCase("No")) {
-        	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &cOffline"), Utils.chat("&bRank: &7") + setRank));
+        if (setStatus.equalsIgnoreCase("No") || setRank.equalsIgnoreCase("")) {
+        	playerm.setLore(Arrays.asList(Utils.chat("&bStatus: &cOffline"), Utils.chat("&bRank: &7Unavailable") + setRank));
             }
         playerm.setOwner(bannedPlayer);
         playerm.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&b" + bannedPlayer));
