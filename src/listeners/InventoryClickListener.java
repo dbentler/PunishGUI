@@ -30,22 +30,19 @@ public class InventoryClickListener implements Listener {
 				return;
 			}
 			
-			// Chat Offenses Category
+			if (p.hasPermission("litebans.ban")) {
 			if ( e.getRawSlot() == 11 ) {
 				p.performCommand("warn " + punish.bannedPlayer + " " + punish.msgreason);
 				p.closeInventory();
 			}
-			// Hacked Clients Category
 			if ( e.getRawSlot() == 12 ) {
 				p.performCommand("tempmuteip " + punish.bannedPlayer + " " + punish.msglength + " " + punish.msgreason);
 				p.closeInventory();
 			}
-			// Malicious Category
 			if ( e.getRawSlot() == 13 ) {
 				p.performCommand("muteip " + punish.bannedPlayer + " " + punish.msgreason);
 				p.closeInventory();
 			}
-			// Miscellaneous Category
 			if ( e.getRawSlot() == 14 ) {
 				p.performCommand("tempbanip " + punish.bannedPlayer + " " + punish.msglength + " " + punish.msgreason);
 				p.closeInventory();
@@ -53,6 +50,21 @@ public class InventoryClickListener implements Listener {
 			if ( e.getRawSlot() == 15 ) {
 				p.performCommand("banip " + punish.bannedPlayer + " " + punish.msgreason);
 				p.closeInventory();
+			}
+			}
+			if (!p.hasPermission("litebans.ban")) {
+			if ( e.getRawSlot() == 11 ) {
+				p.performCommand("warn " + punish.bannedPlayer + " " + punish.msgreason);
+				p.closeInventory();
+			}
+			if ( e.getRawSlot() == 12 ) {
+				p.performCommand("tempmuteip " + punish.bannedPlayer + " " + punish.msglength + " " + punish.msgreason);
+				p.closeInventory();
+			}
+			if ( e.getRawSlot() == 13 ) {
+				p.performCommand("muteip " + punish.bannedPlayer + " " + punish.msgreason);
+				p.closeInventory();
+			}
 			}
 			}
 }

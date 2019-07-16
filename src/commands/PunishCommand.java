@@ -63,6 +63,11 @@ public class PunishCommand implements CommandExecutor {
         glassm.setDisplayName(" ");
         glass.setItemMeta((ItemMeta)glassm);
         
+        ItemStack glassred = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)14);
+        ItemMeta glassredm = glassred.getItemMeta();
+        glassredm.setDisplayName(Utils.chat("&cYou do not have permission."));
+        glassred.setItemMeta((ItemMeta)glassredm);
+        
         punish.setItem(18, punishPlayer);
         punish.setItem(0, glass);
         punish.setItem(1, glass);
@@ -85,11 +90,20 @@ public class PunishCommand implements CommandExecutor {
         punish.setItem(24, glass);
         punish.setItem(25, glass);
         punish.setItem(26, glass);
+        if (p.hasPermission("litebans.ban")) {
         Utils.createItem(punish, 399, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
         Utils.createItem(punish, 399, 1, 12, "&eTempmute", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
         Utils.createItem(punish, 399, 1, 13, "&6Mute", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
         Utils.createItem(punish, 399, 1, 14, "&cTempban", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
         Utils.createItem(punish, 399, 1, 15, "&4Ban", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+        }
+        if (!p.hasPermission("litebans.ban")) {
+            Utils.createItem(punish, 399, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+            Utils.createItem(punish, 399, 1, 12, "&eTempmute", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
+            Utils.createItem(punish, 399, 1, 13, "&6Mute", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+            punish.setItem(14, glassred);
+            punish.setItem(15, glassred);
+            }
         p.openInventory(punish);
 
    }
