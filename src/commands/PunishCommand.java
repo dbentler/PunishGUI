@@ -60,8 +60,7 @@ public class PunishCommand implements CommandExecutor {
         
         ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)15);
         ItemMeta glassm = glass.getItemMeta();
-        glassm.setDisplayName(Utils.chat("&aWarn"));
-        glassm.setLore(Arrays.asList(Utils.chat("&bTarget: &7") + bannedPlayer, Utils.chat("&bReason: &7") + msgreason));
+        glassm.setDisplayName(Utils.chat(" "));
         glass.setItemMeta((ItemMeta)glassm);
         
         ItemStack glassred = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)14);
