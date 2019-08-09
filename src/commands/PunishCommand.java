@@ -23,20 +23,10 @@ import utils.Utils;
 public class PunishCommand implements CommandExecutor {
 	
 	public static String bannedPlayer;
-	
 	public static String msglength;
 	public static StringBuilder msgreason;
-
-    @SuppressWarnings("unused")
-	private PunishGUI plugin;
-
-    public PunishCommand(PunishGUI plugin) {
-        this.plugin = plugin;
-
-        plugin.getCommand("punish").setExecutor(this);
-    }
     
-    @SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	public static void punish(Player p) {
 		OfflinePlayer target = Bukkit.getOfflinePlayer(bannedPlayer);
     	String Status = "%player_online%";
@@ -80,6 +70,9 @@ public class PunishCommand implements CommandExecutor {
         punish.setItem(8, glass);
         punish.setItem(9, glass);
         punish.setItem(10, glass);
+        punish.setItem(11, glass);
+        punish.setItem(13, glass);
+        punish.setItem(15, glass);
         punish.setItem(16, glass);
         punish.setItem(17, glass);
         punish.setItem(19, glass);
@@ -91,53 +84,70 @@ public class PunishCommand implements CommandExecutor {
         punish.setItem(25, glass);
         punish.setItem(26, glass);
         if (p.hasPermission("litebans.ban")) {
-        Utils.createItemByte(punish, 35, 5, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
-        Utils.createItemByte(punish, 35, 4, 1, 12, "&eTempmute", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
-        Utils.createItemByte(punish, 35, 1, 1, 13, "&6Mute", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
-        Utils.createItemByte(punish, 35, 14, 1, 14, "&cTempban", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
-        Utils.createItemByte(punish, 35, 15, 1, 15, "&4Ban", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
+        	Utils.createItemByte(punish, 35, 4, 1, 12, "&eMute");
+        	Utils.createItemByte(punish, 35, 14, 1, 14, "&cBan");
         }
         if (!p.hasPermission("litebans.ban")) {
-            Utils.createItem(punish, 399, 1, 11, "&aWarn", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
-            Utils.createItem(punish, 399, 1, 12, "&eTempmute", "&bTarget: &7" + bannedPlayer, "&bTime: &7" + msglength, "&bReason: &7" + msgreason);
-            Utils.createItem(punish, 399, 1, 13, "&6Mute", "&bTarget: &7" + bannedPlayer, "&bReason: &7" + msgreason);
-            punish.setItem(14, glassred);
-            punish.setItem(15, glassred);
+        	punish.setItem(12, glass);
+        	Utils.createItemByte(punish, 35, 4, 1, 13, "&eMute");
+        	punish.setItem(14, glass);
             }
         p.openInventory(punish);
 
    }
+    
+    public static void mute(Player player) {
+    	Inventory mute = Bukkit.getServer().createInventory(null, 9, Utils.chat("&7Mute ") + Utils.chat("&b") + bannedPlayer);
+    	Utils.createItem(mute, 386, 1, 0, "&dSpam", "&f30m Mute");
+    	Utils.createItem(mute, 386, 1, 1, "&dSpam", "&f1h Mute");
+    	Utils.createItem(mute, 386, 1, 2, "&dStaff/Player Disrespect", "&f3h Mute");
+    	Utils.createItem(mute, 386, 1, 3, "&dFailure to use common sense", "&f3h Mute");
+    	Utils.createItem(mute, 386, 1, 4, "&dDeath Remarks/Threats", "&f3d Mute");
+    	Utils.createItem(mute, 386, 1, 5, "&dRacism", "&f1d Mute");
+    	Utils.createItem(mute, 386, 1, 6, "&dRacism (Hard R)", "&f3d Mute");
+    	Utils.createItem(mute, 386, 1, 7, "&dAdvertising", "&fPerm Mute", "&fUse this if there's no mod on.");
+    	player.openInventory(mute);
+    }
+    
+    public static void ban(Player player) {
+    	Inventory ban = Bukkit.getServer().createInventory(null, 9, Utils.chat("&7Ban ") + Utils.chat("&b") + bannedPlayer);
+    	Utils.createItem(ban, 278, 1, 0, "&dHacked Client (Xray)", "&f14d Ban");
+    	Utils.createItem(ban, 276, 1, 1, "&dHacked Client (Kill Aura)", "&f14d Ban");
+    	Utils.createItem(ban, 288, 1, 2, "&dHacked Client (Flight)", "&f14d Ban");
+    	Utils.createItem(ban, 386, 1, 3, "&dAbusing Helpop", "&f3h Ban");
+    	Utils.createItem(ban, 386, 1, 4, "&dGeneral Toxicity", "&f1d Ban");
+    	Utils.createItem(ban, 386, 1, 5, "&dAlt", "&fPerm Ban");
+    	Utils.createItem(ban, 386, 1, 6, "&dDDoS Threats", "&fPerm Ban");
+    	Utils.createItem(ban, 386, 1, 7, "&dAdvertising", "&fPerm Ban");
+    	player.openInventory(ban);
+    }
    
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
+    	if (!(sender instanceof Player)) {
             sender.sendMessage("Console cant perform this command.");
             return true;
         }
         Player player = (Player) sender;
-        if (player.hasPermission("lw.punish")) {
-            if (args.length < 3) {
-                player.sendMessage(Utils.chat("&cUsage: &7/punish <player> <time> <reason>"));
-                player.sendMessage(Utils.chat("&cExample: &7/punish DeathRealms 14d Hacked Client"));
-            }
-            else {
-                Player target = Bukkit.getPlayer(args[2]);
-                PunishCommand.msgreason = new StringBuilder(args[2]);
-                for (int arg = 3; arg < args.length; arg++) {
-                	msgreason.append(" ").append(args[arg]);
-                }
-                PunishCommand.bannedPlayer = args[0];
-                PunishCommand.msglength = args[1];
-                if (target == null) {
-                	PunishCommand.punish(player);
-                }
-                	else if (target != null) {
-                        	PunishCommand.punish(player);
-                }
-            }
-        }
-        else {
-            player.sendMessage(Utils.chat("&8[&f&lLone&4&lWolves&8] &fYou do not have permission to do this."));
+        if (cmd.getName().equalsIgnoreCase("punish")) {
+        	if (player.hasPermission("lw.punish")) {
+        		if (args.length == 0) {
+        			player.sendMessage(Utils.chat("&cUsage: &7/punish <player>"));
+        		}
+        		if (args.length == 1) {
+        			PunishCommand.bannedPlayer = args[0];
+        			Player target = Bukkit.getPlayer(args[0]);
+        			if (!(target == null)) {
+        				PunishCommand.punish(player);
+        			}
+        			if (target == null) {
+        				PunishCommand.punish(player);
+        			}
+        		}
+        	}
+        	if (!player.hasPermission("lw.punish")) {
+        		player.sendMessage(PunishGUI.NO_PERMS);
+        	}
         }
         return true;
     }
