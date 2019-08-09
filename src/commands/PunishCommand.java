@@ -23,8 +23,6 @@ import utils.Utils;
 public class PunishCommand implements CommandExecutor {
 	
 	public static String bannedPlayer;
-	public static String msglength;
-	public static StringBuilder msgreason;
     
 	@SuppressWarnings("deprecation")
 	public static void punish(Player p) {
@@ -111,15 +109,39 @@ public class PunishCommand implements CommandExecutor {
     
     public static void ban(Player player) {
     	Inventory ban = Bukkit.getServer().createInventory(null, 9, Utils.chat("&7Ban ") + Utils.chat("&b") + bannedPlayer);
-    	Utils.createItem(ban, 278, 1, 0, "&dHacked Client (Xray)", "&f14d Ban");
-    	Utils.createItem(ban, 276, 1, 1, "&dHacked Client (Kill Aura)", "&f14d Ban");
-    	Utils.createItem(ban, 288, 1, 2, "&dHacked Client (Flight)", "&f14d Ban");
+    	Utils.createItem(ban, 278, 1, 0, "&dHacked Client (Xray)", "&fClick to choose the ban time.");
+    	Utils.createItem(ban, 276, 1, 1, "&dHacked Client (Kill Aura)", "&fClick to choose the ban time.");
+    	Utils.createItem(ban, 288, 1, 2, "&dHacked Client (Flight)", "&fClick to choose the ban time.");
     	Utils.createItem(ban, 386, 1, 3, "&dAbusing Helpop", "&f3h Ban");
     	Utils.createItem(ban, 386, 1, 4, "&dGeneral Toxicity", "&f1d Ban");
     	Utils.createItem(ban, 386, 1, 5, "&dAlt", "&fPerm Ban");
     	Utils.createItem(ban, 386, 1, 6, "&dDDoS Threats", "&fPerm Ban");
     	Utils.createItem(ban, 386, 1, 7, "&dAdvertising", "&fPerm Ban");
     	player.openInventory(ban);
+    }
+    
+    public static void xray(Player player) {
+    	Inventory xray = Bukkit.getServer().createInventory(null, 9, Utils.chat("&cXray"));
+    	Utils.createItemByte(xray, 35, 14, 14, 3, "&cFirst Offense", "&f14d Ban");
+    	Utils.createItemByte(xray, 35, 14, 21, 4, "&cSecond Offense", "&f21d Ban");
+    	Utils.createItemByte(xray, 35, 14, 30, 5, "&cThird Offense", "&f30d Ban");
+    	player.openInventory(xray);
+    }
+    
+    public static void ka(Player player) {
+    	Inventory ka = Bukkit.getServer().createInventory(null, 9, Utils.chat("&cKill Aura"));
+    	Utils.createItemByte(ka, 35, 14, 14, 3, "&cFirst Offense", "&f14d Ban");
+    	Utils.createItemByte(ka, 35, 14, 21, 4, "&cSecond Offense", "&f21d Ban");
+    	Utils.createItemByte(ka, 35, 14, 30, 5, "&cThird Offense", "&f30d Ban");
+    	player.openInventory(ka);
+    }
+    
+    public static void flight(Player player) {
+    	Inventory flight = Bukkit.getServer().createInventory(null, 9, Utils.chat("&cFlight"));
+    	Utils.createItemByte(flight, 35, 14, 14, 3, "&cFirst Offense", "&f14d Ban");
+    	Utils.createItemByte(flight, 35, 14, 21, 4, "&cSecond Offense", "&f21d Ban");
+    	Utils.createItemByte(flight, 35, 14, 30, 5, "&cThird Offense", "&f30d Ban");
+    	player.openInventory(flight);
     }
    
     @Override
@@ -135,13 +157,20 @@ public class PunishCommand implements CommandExecutor {
         			player.sendMessage(Utils.chat("&cUsage: &7/punish <player>"));
         		}
         		if (args.length == 1) {
-        			PunishCommand.bannedPlayer = args[0];
-        			Player target = Bukkit.getPlayer(args[0]);
-        			if (!(target == null)) {
-        				PunishCommand.punish(player);
+        			if (args[0].equalsIgnoreCase("times")) {
+        				for (String message : PunishGUI.plugin.getConfig().getStringList("Punish Times")) {
+        					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        				}
         			}
-        			if (target == null) {
-        				PunishCommand.punish(player);
+        			else {
+        				PunishCommand.bannedPlayer = args[0];
+            			Player target = Bukkit.getPlayer(args[0]);
+            			if (!(target == null)) {
+            				PunishCommand.punish(player);
+            			}
+            			if (target == null) {
+            				PunishCommand.punish(player);
+            			}
         			}
         		}
         	}

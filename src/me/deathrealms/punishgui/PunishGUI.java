@@ -13,8 +13,24 @@ public class PunishGUI extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		this.getServer().getConsoleSender().sendMessage("");
+    	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage(utils.Utils.chat("&fLone&4Wolves-&fPunishGUI v2.3"));
+    	this.getServer().getConsoleSender().sendMessage(utils.Utils.chat("&aEnabled!"));
+    	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage("");
 		plugin = this;
+		this.saveDefaultConfig();
 		Bukkit.getPluginManager().registerEvents(new InventoryClickListener(), this);
 		this.getCommand("punish").setExecutor(new PunishCommand());
+	}
+	
+	public void onDisable() {
+		this.getServer().getConsoleSender().sendMessage("");
+		this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage(utils.Utils.chat("&fLone&4Wolves-&fPunishGUI v2.3"));
+    	this.getServer().getConsoleSender().sendMessage(utils.Utils.chat("&cDisabled"));
+    	this.getServer().getConsoleSender().sendMessage("----------------------------------------");
+    	this.getServer().getConsoleSender().sendMessage("");
 	}
 }
