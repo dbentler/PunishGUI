@@ -47,34 +47,58 @@ public class PunishManager extends Utils implements Listener {
 			if (e.getRawSlot() == 0) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 30m " + " Spam");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 1) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 1h " + " Spam");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 2) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 3h " + " Staff/Player Disrespect");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 3) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 3h " + " Failure to use common sense");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 4) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 3d " + " Death Remarks/Threats");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 5) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 1d " + " Racism");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 6) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " 3d " + " Racism (Hard R)");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 7) {
 				player.performCommand("muteip " + PunishCommand.bannedPlayer + " Advertising");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 		}
 		if (title.equals(msg("&7Ban ") + msg("&b") + PunishCommand.bannedPlayer)) {
@@ -83,33 +107,57 @@ public class PunishManager extends Utils implements Listener {
 				return;
 			}
 			if (e.getRawSlot() == 0) {
-				PunishCommand.xray(player);
+				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					PunishCommand.xray(player);
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 1) {
-				PunishCommand.ka(player);
+				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					PunishCommand.ka(player);
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 2) {
-				PunishCommand.flight(player);
+				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					PunishCommand.flight(player);
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 3) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 3h " + " Abusing Helpop");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 4) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 1d " + " General Toxicity");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 5) {
 				player.performCommand("ban " + PunishCommand.bannedPlayer + " Alt");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 6) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " DDoS Threats");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 			if (e.getRawSlot() == 7) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " Advertising");
 				player.closeInventory();
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+					player.closeInventory();
+		        }, 2L);
 			}
 		}
 		if (title.equals(msg("&cXray"))) {
@@ -121,32 +169,32 @@ public class PunishManager extends Utils implements Listener {
 			if (e.getRawSlot() == 3) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 14d " + " Hacked Client (Xray)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 			if (e.getRawSlot() == 4) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 21d " + " Hacked Client (Xray)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 			if (e.getRawSlot() == 5) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 30d " + " Hacked Client (Xray)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 		}
 		if (title.equals(msg("&cKill Aura"))) {
@@ -158,32 +206,32 @@ public class PunishManager extends Utils implements Listener {
 			if (e.getRawSlot() == 3) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 14d " + " Hacked Client (Kill Aura)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 			if (e.getRawSlot() == 4) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 21d " + " Hacked Client (Kill Aura)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 			if (e.getRawSlot() == 5) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 30d " + " Hacked Client (Kill Aura)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 		}
 		if (title.equals(msg("&cFlight"))) {
@@ -195,32 +243,32 @@ public class PunishManager extends Utils implements Listener {
 			if (e.getRawSlot() == 3) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 14d " + " Hacked Client (Flight)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 			if (e.getRawSlot() == 4) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 21d " + " Hacked Client (Flight)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 			if (e.getRawSlot() == 5) {
 				player.performCommand("banip " + PunishCommand.bannedPlayer + " 30d " + " Hacked Client (Flight)");
 				player.closeInventory();
-				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-		            @Override
-		            public void run() {
-		            	player.closeInventory();
-		            }
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
 		        }, 2L);
+				scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+		            player.closeInventory();
+		        }, 4L);
 			}
 		}
 	}
@@ -230,12 +278,14 @@ public class PunishManager extends Utils implements Listener {
 		Player player = (Player) event.getPlayer();
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		String title = event.getInventory().getTitle();
+		if (title.equals(msg("&7Mute ") + msg("&b") + PunishCommand.bannedPlayer) || title.equals(msg("&7Ban ") + msg("&b") + PunishCommand.bannedPlayer)) {
+			scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+	            PunishCommand.punish(player);
+	        }, 1L);
+		}
 		if (title.equals(msg("&cXray")) || title.equals(msg("&cKill Aura")) || title.equals(msg("&cFlight"))) {
-			scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
-	            @Override
-	            public void run() {
-	            	PunishCommand.ban(player);
-	            }
+			scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, () -> {
+	            PunishCommand.ban(player);
 	        }, 1L);
 		}
 	}
