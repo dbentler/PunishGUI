@@ -1,5 +1,5 @@
 name: LW-PunishGUI
-main: me.deathrealms.punishgui.PunishGUI
+main: me.deathrealms.PunishGUI
 version: 2.3
 description: PunishGUI plugin coded by the LoneWolves Development Team. 
 author: DeathRealms & EzJamo

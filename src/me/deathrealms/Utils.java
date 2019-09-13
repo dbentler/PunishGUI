@@ -1,4 +1,4 @@
-package utils;
+package me.deathrealms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Utils {
 	
-	public static String chat (String s) {
+	public static String msg(String s) {
 		return ChatColor.translateAlternateColorCodes('&', s);
 	}
 	
@@ -25,9 +25,9 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (msg(displayName));
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);
@@ -46,9 +46,9 @@ public class Utils {
 		item = new ItemStack(Material.getMaterial(materialId), amount, (short) byteId);
 		
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName (Utils.chat(displayName));
+		meta.setDisplayName (msg(displayName));
 		for (String s : loreString) {
-			lore.add(Utils.chat(s));
+			lore.add(msg(s));
 		}
 		meta.setLore(lore);;
 		item.setItemMeta(meta);

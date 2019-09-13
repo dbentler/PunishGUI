@@ -1,4 +1,4 @@
-package listeners;
+package me.deathrealms.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -8,18 +8,18 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import commands.PunishCommand;
-import me.deathrealms.punishgui.PunishGUI;
-import utils.Utils;
+import me.deathrealms.PunishGUI;
+import me.deathrealms.Utils;
+import me.deathrealms.commands.PunishCommand;
 
-public class InventoryClickListener implements Listener {
+public class PunishManager extends Utils implements Listener {
 	
 	@EventHandler
 	public void onClicked(InventoryClickEvent e) {
 		Player player = (Player) e.getWhoClicked();
 		String title = e.getInventory().getTitle();
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-		if (title.equals(Utils.chat("&7Punish ") + Utils.chat("&b") + PunishCommand.bannedPlayer)) {
+		if (title.equals(msg("&7Punish ") + msg("&b") + PunishCommand.bannedPlayer)) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -39,7 +39,7 @@ public class InventoryClickListener implements Listener {
 			}
 		}
 		
-		if (title.equals(Utils.chat("&7Mute ") + Utils.chat("&b") + PunishCommand.bannedPlayer)) {
+		if (title.equals(msg("&7Mute ") + msg("&b") + PunishCommand.bannedPlayer)) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -77,7 +77,7 @@ public class InventoryClickListener implements Listener {
 				player.closeInventory();
 			}
 		}
-		if (title.equals(Utils.chat("&7Ban ") + Utils.chat("&b") + PunishCommand.bannedPlayer)) {
+		if (title.equals(msg("&7Ban ") + msg("&b") + PunishCommand.bannedPlayer)) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -112,7 +112,7 @@ public class InventoryClickListener implements Listener {
 				player.closeInventory();
 			}
 		}
-		if (title.equals(Utils.chat("&cXray"))) {
+		if (title.equals(msg("&cXray"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -149,7 +149,7 @@ public class InventoryClickListener implements Listener {
 		        }, 2L);
 			}
 		}
-		if (title.equals(Utils.chat("&cKill Aura"))) {
+		if (title.equals(msg("&cKill Aura"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -186,7 +186,7 @@ public class InventoryClickListener implements Listener {
 		        }, 2L);
 			}
 		}
-		if (title.equals(Utils.chat("&cFlight"))) {
+		if (title.equals(msg("&cFlight"))) {
 			e.setCancelled(true);
 			if (e.getCurrentItem() == null) {
 				return;
@@ -230,7 +230,7 @@ public class InventoryClickListener implements Listener {
 		Player player = (Player) event.getPlayer();
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		String title = event.getInventory().getTitle();
-		if (title.equals(Utils.chat("&cXray")) || title.equals(Utils.chat("&cKill Aura")) || title.equals(Utils.chat("&cFlight"))) {
+		if (title.equals(msg("&cXray")) || title.equals(msg("&cKill Aura")) || title.equals(msg("&cFlight"))) {
 			scheduler.scheduleSyncDelayedTask(PunishGUI.plugin, new Runnable() {
 	            @Override
 	            public void run() {
